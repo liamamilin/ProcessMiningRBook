@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 创建日志文件 | Process Mining</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.30 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 创建日志文件 | Process Mining" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 创建日志文件 | Process Mining" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="米霖" />
+
+
+<meta name="date" content="2023-01-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="process-mining-in-r.html"/>
+<link rel="next" href="流程分析.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Process Mining Book</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> url: your book url like https://bookdown.org/yihui/bookdown</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#什么是流程挖掘"><i class="fa fa-check"></i><b>1.1</b> 什么是流程挖掘</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#流程挖掘的应用场景"><i class="fa fa-check"></i><b>1.2</b> 流程挖掘的应用场景</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="index.html"><a href="index.html#医疗保健"><i class="fa fa-check"></i><b>1.2.1</b> 医疗保健</a></li>
+<li class="chapter" data-level="1.2.2" data-path="index.html"><a href="index.html#业务流程优化案例电商订单处理"><i class="fa fa-check"></i><b>1.2.2</b> 业务流程优化案例：电商订单处理</a></li>
+<li class="chapter" data-level="1.2.3" data-path="index.html"><a href="index.html#合规性和风险管理案例银行反洗钱aml流程"><i class="fa fa-check"></i><b>1.2.3</b> 合规性和风险管理案例：银行反洗钱（AML）流程</a></li>
+<li class="chapter" data-level="1.2.4" data-path="index.html"><a href="index.html#客户体验优化案例在线零售商订单跟踪"><i class="fa fa-check"></i><b>1.2.4</b> 客户体验优化案例：在线零售商订单跟踪</a></li>
+<li class="chapter" data-level="1.2.5" data-path="index.html"><a href="index.html#供应链优化案例零售业供应链"><i class="fa fa-check"></i><b>1.2.5</b> 供应链优化案例：零售业供应链</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="process-mining-in-r.html"><a href="process-mining-in-r.html"><i class="fa fa-check"></i><b>2</b> Process Mining In R</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="process-mining-in-r.html"><a href="process-mining-in-r.html#安装bupar"><i class="fa fa-check"></i><b>2.1</b> 安装bupaR</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="创建日志文件.html"><a href="创建日志文件.html"><i class="fa fa-check"></i><b>3</b> 创建日志文件</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="创建日志文件.html"><a href="创建日志文件.html#case-与-tracee"><i class="fa fa-check"></i><b>3.1</b> case 与 tracee</a></li>
+<li class="chapter" data-level="3.2" data-path="创建日志文件.html"><a href="创建日志文件.html#可用数据集"><i class="fa fa-check"></i><b>3.2</b> 可用数据集</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="创建日志文件.html"><a href="创建日志文件.html#败血症数据集-sepsis"><i class="fa fa-check"></i><b>3.2.1</b> 败血症数据集 Sepsis</a></li>
+<li class="chapter" data-level="3.2.2" data-path="创建日志文件.html"><a href="创建日志文件.html#医院日志-hospital"><i class="fa fa-check"></i><b>3.2.2</b> 医院日志 hospital</a></li>
+<li class="chapter" data-level="3.2.3" data-path="创建日志文件.html"><a href="创建日志文件.html#医院账单数据-hospital_billing"><i class="fa fa-check"></i><b>3.2.3</b> 医院账单数据 hospital_billing</a></li>
+<li class="chapter" data-level="3.2.4" data-path="创建日志文件.html"><a href="创建日志文件.html#道路交通精细化管理-traffic_fines"><i class="fa fa-check"></i><b>3.2.4</b> 道路交通精细化管理 traffic_fines</a></li>
+<li class="chapter" data-level="3.2.5" data-path="创建日志文件.html"><a href="创建日志文件.html#病人数据集-patients"><i class="fa fa-check"></i><b>3.2.5</b> 病人数据集 Patients</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="创建日志文件.html"><a href="创建日志文件.html#读取xes-数据集"><i class="fa fa-check"></i><b>3.3</b> 读取XES 数据集</a></li>
+<li class="chapter" data-level="3.4" data-path="创建日志文件.html"><a href="创建日志文件.html#检查event-log"><i class="fa fa-check"></i><b>3.4</b> 检查event log</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="创建日志文件.html"><a href="创建日志文件.html#查看元数据"><i class="fa fa-check"></i><b>3.4.1</b> 查看元数据</a></li>
+<li class="chapter" data-level="3.4.2" data-path="创建日志文件.html"><a href="创建日志文件.html#获取基本信息"><i class="fa fa-check"></i><b>3.4.2</b> 获取基本信息</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="创建日志文件.html"><a href="创建日志文件.html#数据质量"><i class="fa fa-check"></i><b>3.5</b> 数据质量</a></li>
+<li class="chapter" data-level="3.6" data-path="创建日志文件.html"><a href="创建日志文件.html#参考"><i class="fa fa-check"></i><b>3.6</b> 参考</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="流程分析.html"><a href="流程分析.html"><i class="fa fa-check"></i><b>4</b> 流程分析</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="流程分析.html"><a href="流程分析.html#控制流"><i class="fa fa-check"></i><b>4.1</b> 控制流</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="流程分析.html"><a href="流程分析.html#计算活动的出现频率"><i class="fa fa-check"></i><b>4.1.1</b> 计算活动的出现频率</a></li>
+<li class="chapter" data-level="4.1.2" data-path="流程分析.html"><a href="流程分析.html#计算活动出现的次数"><i class="fa fa-check"></i><b>4.1.2</b> 计算活动出现的次数</a></li>
+<li class="chapter" data-level="4.1.3" data-path="流程分析.html"><a href="流程分析.html#开始结束活动"><i class="fa fa-check"></i><b>4.1.3</b> 开始/结束活动</a></li>
+<li class="chapter" data-level="4.1.4" data-path="流程分析.html"><a href="流程分析.html#轨迹-trace"><i class="fa fa-check"></i><b>4.1.4</b> 轨迹 trace</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="流程分析.html"><a href="流程分析.html#更多参考"><i class="fa fa-check"></i><b>4.2</b> 更多参考</a></li>
+<li class="chapter" data-level="4.3" data-path="流程分析.html"><a href="流程分析.html#性能表现"><i class="fa fa-check"></i><b>4.3</b> 性能表现</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="流程分析.html"><a href="流程分析.html#吞吐时间"><i class="fa fa-check"></i><b>4.3.1</b> 吞吐时间</a></li>
+<li class="chapter" data-level="4.3.2" data-path="流程分析.html"><a href="流程分析.html#处理时间"><i class="fa fa-check"></i><b>4.3.2</b> 处理时间</a></li>
+<li class="chapter" data-level="4.3.3" data-path="流程分析.html"><a href="流程分析.html#空闲时间"><i class="fa fa-check"></i><b>4.3.3</b> 空闲时间</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="流程分析.html"><a href="流程分析.html#组织角度"><i class="fa fa-check"></i><b>4.4</b> 组织角度</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="流程分析.html"><a href="流程分析.html#资源频率"><i class="fa fa-check"></i><b>4.4.1</b> 资源频率</a></li>
+<li class="chapter" data-level="4.4.2" data-path="流程分析.html"><a href="流程分析.html#资源参与"><i class="fa fa-check"></i><b>4.4.2</b> 资源参与</a></li>
+<li class="chapter" data-level="4.4.3" data-path="流程分析.html"><a href="流程分析.html#资源专用化"><i class="fa fa-check"></i><b>4.4.3</b> 资源专用化</a></li>
+<li class="chapter" data-level="4.4.4" data-path="流程分析.html"><a href="流程分析.html#handover-of-work-network---工作交接网络"><i class="fa fa-check"></i><b>4.4.4</b> Handover-of-work network - 工作交接网络</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="可视化.html"><a href="可视化.html"><i class="fa fa-check"></i><b>5</b> 可视化</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="可视化.html"><a href="可视化.html#频率图"><i class="fa fa-check"></i><b>5.1</b> 频率图</a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="可视化.html"><a href="可视化.html#absolute"><i class="fa fa-check"></i><b>5.1.1</b> Absolute</a></li>
+<li class="chapter" data-level="5.1.2" data-path="可视化.html"><a href="可视化.html#absolute-case"><i class="fa fa-check"></i><b>5.1.2</b> Absolute case</a></li>
+<li class="chapter" data-level="5.1.3" data-path="可视化.html"><a href="可视化.html#relative"><i class="fa fa-check"></i><b>5.1.3</b> Relative</a></li>
+<li class="chapter" data-level="5.1.4" data-path="可视化.html"><a href="可视化.html#relative-case"><i class="fa fa-check"></i><b>5.1.4</b> Relative case</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="可视化.html"><a href="可视化.html#性能图"><i class="fa fa-check"></i><b>5.2</b> 性能图</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="可视化.html"><a href="可视化.html#aggregation-function"><i class="fa fa-check"></i><b>5.2.1</b> Aggregation function</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="可视化.html"><a href="可视化.html#高级maps"><i class="fa fa-check"></i><b>5.3</b> 高级maps</a></li>
+<li class="chapter" data-level="5.4" data-path="可视化.html"><a href="可视化.html#动画图"><i class="fa fa-check"></i><b>5.4</b> 动画图</a></li>
+<li class="chapter" data-level="5.5" data-path="可视化.html"><a href="可视化.html#process-matrix"><i class="fa fa-check"></i><b>5.5</b> Process Matrix</a>
+<ul>
+<li class="chapter" data-level="5.5.1" data-path="可视化.html"><a href="可视化.html#频率过程矩阵"><i class="fa fa-check"></i><b>5.5.1</b> 频率过程矩阵</a></li>
+<li class="chapter" data-level="5.5.2" data-path="可视化.html"><a href="可视化.html#性能过程矩阵"><i class="fa fa-check"></i><b>5.5.2</b> 性能过程矩阵</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="可视化.html"><a href="可视化.html#dotted-chart"><i class="fa fa-check"></i><b>5.6</b> Dotted chart</a></li>
+<li class="chapter" data-level="5.7" data-path="可视化.html"><a href="可视化.html#trace-exlorer"><i class="fa fa-check"></i><b>5.7</b> Trace exlorer</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="blocks.html"><a href="blocks.html#equations"><i class="fa fa-check"></i><b>6.1</b> Equations</a></li>
+<li class="chapter" data-level="6.2" data-path="blocks.html"><a href="blocks.html#theorems-and-proofs"><i class="fa fa-check"></i><b>6.2</b> Theorems and proofs</a></li>
+<li class="chapter" data-level="6.3" data-path="blocks.html"><a href="blocks.html#callout-blocks"><i class="fa fa-check"></i><b>6.3</b> Callout blocks</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="sharing-your-book.html"><a href="sharing-your-book.html"><i class="fa fa-check"></i><b>7</b> Sharing your book</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="sharing-your-book.html"><a href="sharing-your-book.html#publishing"><i class="fa fa-check"></i><b>7.1</b> Publishing</a></li>
+<li class="chapter" data-level="7.2" data-path="sharing-your-book.html"><a href="sharing-your-book.html#pages"><i class="fa fa-check"></i><b>7.2</b> 404 pages</a></li>
+<li class="chapter" data-level="7.3" data-path="sharing-your-book.html"><a href="sharing-your-book.html#metadata-for-sharing"><i class="fa fa-check"></i><b>7.3</b> Metadata for sharing</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Process Mining</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="创建日志文件" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> 创建日志文件<a href="创建日志文件.html#创建日志文件" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>流程挖掘中所使用的数据叫做:日志数据(event log) .
+事件日志（Event Log）是记录系统或过程中事件序列的数据集。在过程挖掘和业务流程管理等领域中，事件日志是一种记录系统行为的关键数据来源。每个事件都描述了系统中发生的特定动作或状态变化</p>
+<p>一个事件通常包含以下元素：</p>
+<ol style="list-style-type: decimal">
+<li><p>案例标识（Case ID）： 表示属于哪个特定案例或实例的标识符。在业务过程中，案例可以是一个订单、一个服务请求或其他业务实体。</p></li>
+<li><p>时间戳（Timestamp）： 记录事件发生的时间，精确到日期和时间。</p></li>
+<li><p>活动（Activity）： 描述事件对应的活动或操作。在业务过程中，活动可以是购买商品、提交表单等。</p></li>
+<li><p>资源（Resource）： 指明执行活动的资源，即执行活动的实体，可能是人员、机器或其他。</p></li>
+<li><p>附加信息（Additional Information）： 可能包括其他与事件相关的信息，如输入参数、输出结果等.</p></li>
+</ol>
+<p>一个典型的event log 数据如下所示.</p>
+<pre><code>Case ID   |  Timestamp            |  Activity          |  Resource
+--------------------------------------------------------------
+Order123  |  2023-01-01 08:00:00  |  Purchase Item A  |  User1
+Order123  |  2023-01-01 08:05:00  |  Add to Cart       |  User1
+Order123  |  2023-01-01 08:10:00  |  Login             |  User1
+Service1  |  2023-01-02 10:30:00  |  Process Request   |  System
+Service1  |  2023-01-02 11:00:00  |  Receive Payment   |  System
+</code></pre>
+<div id="case-与-tracee" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> case 与 tracee<a href="创建日志文件.html#case-与-tracee" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li>Trace（轨迹）：</li>
+</ol>
+<p>轨迹是一个实例（例如，一个订单）的活动序列。它表示一个具体实体的操作历史，其中包含了按照时间顺序发生的所有活动。
+例如，订单A的轨迹可能是购买商品、付款、配送。订单B的轨迹可能是购买商品、取消订单。</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Case（案例）：</li>
+</ol>
+<p>案例是一组轨迹的集合，通常代表了相似类型的实体（例如，所有订单的集合）。案例是对一类业务实体的高级概括。
+例如，所有订单的案例可能包含多个轨迹，每个轨迹代表一个具体订单的操作历史。</p>
+<p>我们来看一个创建event log 的例子:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="创建日志文件.html#cb2-1" tabindex="-1"></a><span class="fu">library</span>(bupaverse)</span></code></pre></div>
+<pre><code>## 
+## .______    __    __  .______      ___   ____    ____  _______ .______          _______. _______
+## |   _  \  |  |  |  | |   _  \    /   \  \   \  /   / |   ____||   _  \        /       ||   ____|
+## |  |_)  | |  |  |  | |  |_)  |  /  ^  \  \   \/   /  |  |__   |  |_)  |      |   (----`|  |__
+## |   _  &lt;  |  |  |  | |   ___/  /  /_\  \  \      /   |   __|  |      /        \   \    |   __|
+## |  |_)  | |  `--&#39;  | |  |     /  _____  \  \    /    |  |____ |  |\  \----.----)   |   |  |____
+## |______/   \______/  | _|    /__/     \__\  \__/     |_______|| _| `._____|_______/    |_______|
+##                                                                                                 
+## ── Attaching packages ─────────────────────────────────────── bupaverse 0.1.0 ──
+## ✔ bupaR         0.5.3     ✔ processcheckR 0.1.4
+## ✔ edeaR         0.9.1     ✔ processmapR   0.5.2
+## ✔ eventdataR    0.3.1     
+## ── Conflicts ────────────────────────────────────────── bupaverse_conflicts() ──
+## ✖ bupaR::filter()          masks stats::filter()
+## ✖ processmapR::frequency() masks stats::frequency()
+## ✖ edeaR::setdiff()         masks base::setdiff()
+## ✖ bupaR::timestamp()       masks utils::timestamp()
+## ✖ processcheckR::xor()     masks base::xor()</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="创建日志文件.html#cb4-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
+## ✔ ggplot2 3.4.0     ✔ purrr   1.0.2
+## ✔ tibble  3.2.1     ✔ dplyr   1.1.3
+## ✔ tidyr   1.3.0     ✔ stringr 1.5.0
+## ✔ readr   2.1.3     ✔ forcats 0.5.2
+## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::contains() masks tidyr::contains(), processcheckR::contains()
+## ✖ dplyr::filter()   masks bupaR::filter(), stats::filter()
+## ✖ dplyr::lag()      masks stats::lag()</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="创建日志文件.html#cb6-1" tabindex="-1"></a><span class="fu">library</span>(bupaR)</span>
+<span id="cb6-2"><a href="创建日志文件.html#cb6-2" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span></code></pre></div>
+<pre><code>## Loading required package: timechange
+## 
+## Attaching package: &#39;lubridate&#39;
+## 
+## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="创建日志文件.html#cb8-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">case =</span> <span class="fu">rep</span>(<span class="st">&quot;A&quot;</span>,<span class="dv">5</span>),</span>
+<span id="cb8-2"><a href="创建日志文件.html#cb8-2" tabindex="-1"></a><span class="at">activity_id =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>,<span class="st">&quot;B&quot;</span>,<span class="st">&quot;C&quot;</span>,<span class="st">&quot;D&quot;</span>,<span class="st">&quot;E&quot;</span>),</span>
+<span id="cb8-3"><a href="创建日志文件.html#cb8-3" tabindex="-1"></a><span class="at">activity_instance_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb8-4"><a href="创建日志文件.html#cb8-4" tabindex="-1"></a><span class="at">lifecycle_id =</span> <span class="fu">rep</span>(<span class="st">&quot;complete&quot;</span>,<span class="dv">5</span>),</span>
+<span id="cb8-5"><a href="创建日志文件.html#cb8-5" tabindex="-1"></a><span class="at">timestamp =</span> <span class="fu">now</span>()<span class="sc">+</span><span class="fu">ddays</span>(<span class="dv">5</span>),</span>
+<span id="cb8-6"><a href="创建日志文件.html#cb8-6" tabindex="-1"></a><span class="at">resource =</span> <span class="fu">rep</span>(<span class="st">&quot;resource 1&quot;</span>, <span class="dv">5</span>))</span>
+<span id="cb8-7"><a href="创建日志文件.html#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="创建日志文件.html#cb8-8" tabindex="-1"></a>Meventlog <span class="ot">&lt;-</span> <span class="fu">eventlog</span>(data,<span class="at">case_id =</span> <span class="st">&quot;case&quot;</span>,</span>
+<span id="cb8-9"><a href="创建日志文件.html#cb8-9" tabindex="-1"></a><span class="at">activity_id =</span> <span class="st">&quot;activity_id&quot;</span>,</span>
+<span id="cb8-10"><a href="创建日志文件.html#cb8-10" tabindex="-1"></a><span class="at">activity_instance_id =</span> <span class="st">&quot;activity_instance_id&quot;</span>,</span>
+<span id="cb8-11"><a href="创建日志文件.html#cb8-11" tabindex="-1"></a><span class="at">lifecycle_id =</span> <span class="st">&quot;lifecycle_id&quot;</span>,</span>
+<span id="cb8-12"><a href="创建日志文件.html#cb8-12" tabindex="-1"></a><span class="at">timestamp =</span> <span class="st">&quot;timestamp&quot;</span>,</span>
+<span id="cb8-13"><a href="创建日志文件.html#cb8-13" tabindex="-1"></a><span class="at">resource_id =</span> <span class="st">&quot;resource&quot;</span>)</span>
+<span id="cb8-14"><a href="创建日志文件.html#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="创建日志文件.html#cb8-15" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="创建日志文件.html#cb8-16" tabindex="-1"></a>Meventlog</span></code></pre></div>
+<pre><code>## # Log of 5 events consisting of:
+## 1 trace 
+## 1 case 
+## 5 instances of 5 activities 
+## 1 resource 
+## Events occurred from 2023-12-01 22:48:32 until 2023-12-01 22:48:32 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case 
+## Activity identifier:     activity_id 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle_id 
+## 
+## # A tibble: 5 × 7
+##   case  activity_id activity_instance_id lifecycle_id timestamp          
+##   &lt;chr&gt; &lt;chr&gt;                      &lt;int&gt; &lt;chr&gt;        &lt;dttm&gt;             
+## 1 A     A                              1 complete     2023-12-01 22:48:32
+## 2 A     B                              2 complete     2023-12-01 22:48:32
+## 3 A     C                              3 complete     2023-12-01 22:48:32
+## 4 A     D                              4 complete     2023-12-01 22:48:32
+## 5 A     E                              5 complete     2023-12-01 22:48:32
+## # ℹ 2 more variables: resource &lt;chr&gt;, .order &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="创建日志文件.html#cb10-1" tabindex="-1"></a>Meventlog</span></code></pre></div>
+<pre><code>## # Log of 5 events consisting of:
+## 1 trace 
+## 1 case 
+## 5 instances of 5 activities 
+## 1 resource 
+## Events occurred from 2023-12-01 22:48:32 until 2023-12-01 22:48:32 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case 
+## Activity identifier:     activity_id 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle_id 
+## 
+## # A tibble: 5 × 7
+##   case  activity_id activity_instance_id lifecycle_id timestamp          
+##   &lt;chr&gt; &lt;chr&gt;                      &lt;int&gt; &lt;chr&gt;        &lt;dttm&gt;             
+## 1 A     A                              1 complete     2023-12-01 22:48:32
+## 2 A     B                              2 complete     2023-12-01 22:48:32
+## 3 A     C                              3 complete     2023-12-01 22:48:32
+## 4 A     D                              4 complete     2023-12-01 22:48:32
+## 5 A     E                              5 complete     2023-12-01 22:48:32
+## # ℹ 2 more variables: resource &lt;chr&gt;, .order &lt;int&gt;</code></pre>
+<p>如果我们想要修改case id 对应的变量,可以使用eventlog函数,set函数</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="创建日志文件.html#cb12-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="创建日志文件.html#cb12-2" tabindex="-1"></a>    <span class="fu">eventlog</span>(<span class="at">case_id =</span> <span class="st">&quot;vehicleclass&quot;</span>) <span class="co"># 将case id 设置成为vehicleclass</span></span></code></pre></div>
+<pre><code>## # Log of 34724 events consisting of:
+## 4 traces 
+## 4 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     vehicleclass 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 34,724 × 18
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,714 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
+## #   .order &lt;int&gt;</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="创建日志文件.html#cb14-1" tabindex="-1"></a><span class="co">#traffic_fines %&gt;%</span></span>
+<span id="cb14-2"><a href="创建日志文件.html#cb14-2" tabindex="-1"></a><span class="co">#    set_case_id(&quot;vehicleclass&quot;)</span></span></code></pre></div>
+<p>另外,还可以使用mapping函数提取关于日志的映射.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="创建日志文件.html#cb15-1" tabindex="-1"></a>mapping_fines <span class="ot">&lt;-</span> <span class="fu">mapping</span>(traffic_fines)</span>
+<span id="cb15-2"><a href="创建日志文件.html#cb15-2" tabindex="-1"></a>mapping_fines</span></code></pre></div>
+<pre><code>## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle</code></pre>
+<p>我们可以使用上面描述的方法增量地调整映射。</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="创建日志文件.html#cb17-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="创建日志文件.html#cb17-2" tabindex="-1"></a>    <span class="fu">set_case_id</span>(<span class="st">&quot;vehicleclass&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="创建日志文件.html#cb17-3" tabindex="-1"></a>    <span class="fu">set_activity_id</span>(<span class="st">&quot;notificationtype&quot;</span>) <span class="ot">-&gt;</span> traffic_fines</span></code></pre></div>
+<p>上面的代码我们修改了traffic_fines数据集的映射, 接下来可以是用re_map函数重新映射:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="创建日志文件.html#cb18-1" tabindex="-1"></a>traffic_fines <span class="sc">%&gt;%</span></span>
+<span id="cb18-2"><a href="创建日志文件.html#cb18-2" tabindex="-1"></a>    <span class="fu">re_map</span>(mapping_fines)</span></code></pre></div>
+<pre><code>## # Log of 34724 events consisting of:
+## 44 traces 
+## 10000 cases 
+## 34724 instances of 11 activities 
+## 16 resources 
+## Events occurred from 2006-06-17 until 2012-03-26 
+##  
+## # Variables were mapped as follows:
+## Case identifier:     case_id 
+## Activity identifier:     activity 
+## Resource identifier:     resource 
+## Activity instance identifier:    activity_instance_id 
+## Timestamp:           timestamp 
+## Lifecycle transition:        lifecycle 
+## 
+## # A tibble: 34,724 × 18
+##    case_id activity        lifecycle resource timestamp           amount article
+##    &lt;chr&gt;   &lt;fct&gt;           &lt;fct&gt;     &lt;fct&gt;    &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt;
+##  1 A1      Create Fine     complete  561      2006-07-24 00:00:00 35.0       157
+##  2 A1      Send Fine       complete  &lt;NA&gt;     2006-12-05 00:00:00 &lt;NA&gt;        NA
+##  3 A100    Create Fine     complete  561      2006-08-02 00:00:00 35.0       157
+##  4 A100    Send Fine       complete  &lt;NA&gt;     2006-12-12 00:00:00 &lt;NA&gt;        NA
+##  5 A100    Insert Fine No… complete  &lt;NA&gt;     2007-01-15 00:00:00 &lt;NA&gt;        NA
+##  6 A100    Add penalty     complete  &lt;NA&gt;     2007-03-16 00:00:00 71.5        NA
+##  7 A100    Send for Credi… complete  &lt;NA&gt;     2009-03-30 00:00:00 &lt;NA&gt;        NA
+##  8 A10000  Create Fine     complete  561      2007-03-09 00:00:00 36.0       157
+##  9 A10000  Send Fine       complete  &lt;NA&gt;     2007-07-17 00:00:00 &lt;NA&gt;        NA
+## 10 A10000  Insert Fine No… complete  &lt;NA&gt;     2007-08-02 00:00:00 &lt;NA&gt;        NA
+## # ℹ 34,714 more rows
+## # ℹ 11 more variables: dismissal &lt;chr&gt;, expense &lt;chr&gt;, lastsent &lt;chr&gt;,
+## #   matricola &lt;dbl&gt;, notificationtype &lt;chr&gt;, paymentamount &lt;dbl&gt;, points &lt;dbl&gt;,
+## #   totalpaymentamount &lt;chr&gt;, vehicleclass &lt;chr&gt;, activity_instance_id &lt;chr&gt;,
+## #   .order &lt;int&gt;</code></pre>
+</div>
+<div id="可用数据集" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> 可用数据集<a href="创建日志文件.html#可用数据集" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>eventdataR包中提供了一些可用的真实的event log 数据集</p>
+<div id="败血症数据集-sepsis" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> 败血症数据集 Sepsis<a href="创建日志文件.html#败血症数据集-sepsis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>这个真实的事件日志包含了来自医院的脓毒症病例的事件。脓毒症是一种典型的由感染引起的危及生命的疾病。一个病例代表了通过医院的途径。事件由医院的 ERP (企业资源规划)系统记录。约有1000个个案，共有15,000个事件记录在案，涉及16项不同活动。此外，还记录了39个数据属性，例如，负责活动的小组、测试结果和检查表中的信息。事件和属性值已被匿名化。事件的时间戳已被随机化，但跟踪中的事件之间的时间间隔没有更改. 数据来源于:</p>
+<p><a href="https://doi.org/10.4121/uuid:915d2bfb-7e84-49ad-a286-dc35f063a460" class="uri">https://doi.org/10.4121/uuid:915d2bfb-7e84-49ad-a286-dc35f063a460</a></p>
+</div>
+<div id="医院日志-hospital" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> 医院日志 hospital<a href="创建日志文件.html#医院日志-hospital" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>一家荷兰学术医院的真实生活日志数据</p>
+<p>数据来源于: <a href="https://doi.org/10.4121/uuid:d9769f3d-0ab0-4fb8-803b-0d1120ffcf54" class="uri">https://doi.org/10.4121/uuid:d9769f3d-0ab0-4fb8-803b-0d1120ffcf54</a></p>
+</div>
+<div id="医院账单数据-hospital_billing" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> 医院账单数据 hospital_billing<a href="创建日志文件.html#医院账单数据-hospital_billing" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>事件日志中的100,000个跟踪是记录时间超过三年的流程实例的随机抽样。事件日志中包含了一些属性，比如流程的“状态”、“ caseType”、底层的“诊断”等等。事件和属性值已被匿名化。为此，事件的时间戳已经随机化，但是跟踪中的事件之间的时间间隔没有更改。</p>
+<p><a href="https://doi.org/10.4121/uuid:76c46b83-c930-4798-a1c9-4be94dfeb741" class="uri">https://doi.org/10.4121/uuid:76c46b83-c930-4798-a1c9-4be94dfeb741</a></p>
+</div>
+<div id="道路交通精细化管理-traffic_fines" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> 道路交通精细化管理 traffic_fines<a href="创建日志文件.html#道路交通精细化管理-traffic_fines" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>道路交通罚款管理信息系统的实时事件日志。</p>
+<p><a href="https://doi.org/10.4121/uuid:270fd440-1057-4fb9-89a9-b699b47990f5" class="uri">https://doi.org/10.4121/uuid:270fd440-1057-4fb9-89a9-b699b47990f5</a></p>
+</div>
+<div id="病人数据集-patients" class="section level3 hasAnchor" number="3.2.5">
+<h3><span class="header-section-number">3.2.5</span> 病人数据集 Patients<a href="创建日志文件.html#病人数据集-patients" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>医院急诊室病人的人工事件日志。</p>
+</div>
+</div>
+<div id="读取xes-数据集" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> 读取XES 数据集<a href="创建日志文件.html#读取xes-数据集" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<pre><code>library(xesreadR)
+data &lt;- read_xes(&quot;https://bupar.net/eventdata/exercise1.xes&quot;)</code></pre>
+</div>
+<div id="检查event-log" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> 检查event log<a href="创建日志文件.html#检查event-log" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="查看元数据" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> 查看元数据<a href="创建日志文件.html#查看元数据" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>查看Event log 的元数据(也就是映射关系, 将什么变量映射到case id, 将什么变量映射到时间)</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="创建日志文件.html#cb21-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> mapping</span></code></pre></div>
+<pre><code>## Case identifier:     patient 
+## Activity identifier:     handling 
+## Resource identifier:     employee 
+## Activity instance identifier:    handling_id 
+## Timestamp:           time 
+## Lifecycle transition:        registration_type</code></pre>
+<p>其他可用函数还包括:</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="创建日志文件.html#cb23-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> activity_id</span></code></pre></div>
+<pre><code>## [1] &quot;handling&quot;</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="创建日志文件.html#cb25-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> case_id</span></code></pre></div>
+<pre><code>## [1] &quot;patient&quot;</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="创建日志文件.html#cb27-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> resource_id</span></code></pre></div>
+<pre><code>## [1] &quot;employee&quot;</code></pre>
+</div>
+<div id="获取基本信息" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> 获取基本信息<a href="创建日志文件.html#获取基本信息" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>可以使用summary 函数</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="创建日志文件.html#cb29-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> summary</span></code></pre></div>
+<pre><code>## Number of events:  5442
+## Number of cases:  500
+## Number of traces:  7
+## Number of distinct activities:  7
+## Average trace length:  10.884
+## 
+## Start eventlog:  2017-01-02 11:41:53
+## End eventlog:  2018-05-05 07:16:02</code></pre>
+<pre><code>##                   handling      patient          employee  handling_id       
+##  Blood test           : 474   Length:5442        r1:1000   Length:5442       
+##  Check-out            : 984   Class :character   r2:1000   Class :character  
+##  Discuss Results      : 990   Mode  :character   r3: 474   Mode  :character  
+##  MRI SCAN             : 472                      r4: 472                     
+##  Registration         :1000                      r5: 522                     
+##  Triage and Assessment:1000                      r6: 990                     
+##  X-Ray                : 522                      r7: 984                     
+##  registration_type      time                            .order    
+##  complete:2721     Min.   :2017-01-02 11:41:53.00   Min.   :   1  
+##  start   :2721     1st Qu.:2017-05-06 17:15:18.00   1st Qu.:1361  
+##                    Median :2017-09-08 04:16:50.00   Median :2722  
+##                    Mean   :2017-09-02 20:52:34.40   Mean   :2722  
+##                    3rd Qu.:2017-12-22 15:44:11.25   3rd Qu.:4082  
+##                    Max.   :2018-05-05 07:16:02.00   Max.   :5442  
+## </code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="创建日志文件.html#cb32-1" tabindex="-1"></a><span class="co"># 其他可以用来分析变量的函数包括</span></span>
+<span id="cb32-2"><a href="创建日志文件.html#cb32-2" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="创建日志文件.html#cb32-3" tabindex="-1"></a><span class="co"># patients %&gt;% n_activities</span></span>
+<span id="cb32-4"><a href="创建日志文件.html#cb32-4" tabindex="-1"></a><span class="co"># patients %&gt;% n_activity_instances</span></span>
+<span id="cb32-5"><a href="创建日志文件.html#cb32-5" tabindex="-1"></a><span class="co"># patients %&gt;% n_cases</span></span>
+<span id="cb32-6"><a href="创建日志文件.html#cb32-6" tabindex="-1"></a><span class="co"># patients %&gt;% n_events</span></span>
+<span id="cb32-7"><a href="创建日志文件.html#cb32-7" tabindex="-1"></a><span class="co"># patients %&gt;% n_traces</span></span>
+<span id="cb32-8"><a href="创建日志文件.html#cb32-8" tabindex="-1"></a><span class="co"># patients %&gt;% n_resources</span></span></code></pre></div>
+<p>其他分析函数</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="创建日志文件.html#cb33-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">activities</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##   handling              absolute_frequency relative_frequency
+##   &lt;fct&gt;                              &lt;int&gt;              &lt;dbl&gt;
+## 1 Registration                         500             0.184 
+## 2 Triage and Assessment                500             0.184 
+## 3 Discuss Results                      495             0.182 
+## 4 Check-out                            492             0.181 
+## 5 X-Ray                                261             0.0959
+## 6 Blood test                           237             0.0871
+## 7 MRI SCAN                             236             0.0867</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="创建日志文件.html#cb35-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">cases</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 500 × 10
+##    patient trace_length number_of_activities start_timestamp    
+##    &lt;chr&gt;          &lt;int&gt;                &lt;int&gt; &lt;dttm&gt;             
+##  1 1                  6                    6 2017-01-02 11:41:53
+##  2 10                 5                    5 2017-01-06 05:58:54
+##  3 100                5                    5 2017-04-11 16:34:31
+##  4 101                5                    5 2017-04-16 06:38:58
+##  5 102                5                    5 2017-04-16 06:38:58
+##  6 103                6                    6 2017-04-19 20:22:01
+##  7 104                6                    6 2017-04-19 20:22:01
+##  8 105                6                    6 2017-04-21 02:19:09
+##  9 106                6                    6 2017-04-21 02:19:09
+## 10 107                5                    5 2017-04-22 18:32:16
+## # ℹ 490 more rows
+## # ℹ 6 more variables: complete_timestamp &lt;dttm&gt;, trace &lt;chr&gt;, trace_id &lt;dbl&gt;,
+## #   duration &lt;drtn&gt;, first_activity &lt;fct&gt;, last_activity &lt;fct&gt;</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="创建日志文件.html#cb37-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">resources</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##   employee absolute_frequency relative_frequency
+##   &lt;fct&gt;                 &lt;int&gt;              &lt;dbl&gt;
+## 1 r1                      500             0.184 
+## 2 r2                      500             0.184 
+## 3 r6                      495             0.182 
+## 4 r7                      492             0.181 
+## 5 r5                      261             0.0959
+## 6 r3                      237             0.0871
+## 7 r4                      236             0.0867</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="创建日志文件.html#cb39-1" tabindex="-1"></a>patients <span class="sc">%&gt;%</span> <span class="fu">traces</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 7 × 3
+##   trace                                    absolute_frequency relative_frequency
+##   &lt;chr&gt;                                                 &lt;int&gt;              &lt;dbl&gt;
+## 1 Registration,Triage and Assessment,X-Ra…                258              0.516
+## 2 Registration,Triage and Assessment,Bloo…                234              0.468
+## 3 Registration,Triage and Assessment,Bloo…                  2              0.004
+## 4 Registration,Triage and Assessment,X-Ray                  2              0.004
+## 5 Registration,Triage and Assessment                        2              0.004
+## 6 Registration,Triage and Assessment,X-Ra…                  1              0.002
+## 7 Registration,Triage and Assessment,Bloo…                  1              0.002</code></pre>
+</div>
+</div>
+<div id="数据质量" class="section level2 hasAnchor" number="3.5">
+<h2><span class="header-section-number">3.5</span> 数据质量<a href="创建日志文件.html#数据质量" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>R 中 daqapo包提供了检查Event log 数据质量的一个R包.</p>
+</div>
+<div id="参考" class="section level2 hasAnchor" number="3.6">
+<h2><span class="header-section-number">3.6</span> 参考<a href="创建日志文件.html#参考" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<ol style="list-style-type: decimal">
+<li><a href="https://rpubs.com/liam/Bupartutorial" class="uri">https://rpubs.com/liam/Bupartutorial</a></li>
+<li><a href="https://bupaverse.github.io/docs/data_quality.html" class="uri">https://bupaverse.github.io/docs/data_quality.html</a></li>
+<li><a href="https://rpubs.com/liam/PackagesAboutProcessMining" class="uri">https://rpubs.com/liam/PackagesAboutProcessMining</a></li>
+<li><a href="https://rpubs.com/liam/bupaRExtensions" class="uri">https://rpubs.com/liam/bupaRExtensions</a></li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="process-mining-in-r.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="流程分析.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
